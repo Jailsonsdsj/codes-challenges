@@ -4,20 +4,28 @@
 
 // let money = parseInt(data[0]);
 
-const notes = [100,50,20,10,5,2,1,0.50,0.25,0.10,0.5,0.01];
-const totalValue = 576.73;
-const calculate = (notes,value) =>{
+const notes = [100.00, 50.00, 20.00, 10.00, 5.00, 2.00, 1.00, 0.50, 0.25, 0.10, 0.05, 0.01];
+const totalValue = 0.14;
+const calculate = (notes, value) =>{
     let result;
+    let coinType;
+
     notes.forEach(element => {
-        result = value / element|0;
-        if(element == 100){
+        //bitwise integer division
+        result = value/element | 0;
+        
+        if(element == 100.00){
             console.log('NOTAS:')
-        }else if(element == 1){
+            coinType = "nota"
+        }else if(element == 1.00){
             console.log('MOEDAS: ')
+            coinType = "moeda"
         }
-        console.log(`${result} nota(s) de R$ ${element}`);
-        value %= element;
+        console.log(`${result} ${coinType}(s) de R$ ${element}`);
+        value = (value%element).toFixed(2);
+      
     });
 }
 
-calculate(notes,totalValue);
+calculate(notes, totalValue);
+
